@@ -156,23 +156,17 @@ def course_detail(course_id):
     return render_template('course_detail.html', 
                          course=course,
                          faqs=faqs,
-                         articles=articles,
-                         razorpay_key=os.getenv('RAZORPAY_KEY_ID'))
+                         articles=articles)
 
 @app.route('/enroll/<int:course_id>')
 def enroll(course_id):
     try:
         course = Course.query.get_or_404(course_id)
+        # Redirect to Google Form for enrollment
+        google_form_url = "https://forms.gle/YOUR_GOOGLE_FORM_ID_HERE"  # Replace with your actual Google Form URL
+        return redirect(google_form_url)
     except Exception as e:
         flash('Course not found', 'error')
-        return redirect(url_for('home'))
-    return render_template('enrollment.html', course=course)
-
-@app.route('/submit-enrollment', methods=['POST'])
-def submit_enrollment():
-    if request.method == 'POST':
-        # Process the form data and store in database
-        flash('Enrollment successful! Please join the WhatsApp group.', 'success')
         return redirect(url_for('home'))
 
 @app.route('/programs')

@@ -635,15 +635,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Enrollment functionality
 function enrollCourse(courseName, price) {
-    if (price === 0) {
-        // Certificate or free course
-        window.location.href = "{{ url_for('contact') }}";
-    } else {
-        // Paid course - redirect to contact with course info
-        const message = `I'm interested in enrolling in the ${courseName} course (₹${price})`;
-        const encodedMessage = encodeURIComponent(message);
-        window.location.href = `{{ url_for('contact') }}?course=${encodeURIComponent(courseName)}&price=${price}&message=${encodedMessage}`;
-    }
+    // Redirect to Google Form for enrollment
+    const googleFormUrl = "https://forms.gle/YOUR_GOOGLE_FORM_ID_HERE"; // Replace with your actual Google Form URL
+    window.location.href = googleFormUrl;
 }
 
 // Event gallery slider
