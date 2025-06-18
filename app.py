@@ -10,11 +10,13 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key')
 
 # Database configuration for both development and production
-if os.getenv('DATABASE_URL'):
-    # Production (Render)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+database_url = os.getenv('DATABASE_URL')
+if database_url:
+    # Production (Render) - PostgreSQL
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 else:
-    # Development (local)
+    # Development (local) - SQLite
     app.config['SQLALCHEMY_DATABASE_URI'] = r'sqlite:///C:/Users/balaj/db/mydb.db'
 
 db = SQLAlchemy(app)
@@ -109,15 +111,25 @@ class Statistics(db.Model):
     icon = db.Column(db.String(50))
     is_active = db.Column(db.Boolean, default=True)
 
+def get_data_or_empty(model, **filters):
+    """Safely get data from database or return empty list if database error"""
+    try:
+        if filters:
+            return model.query.filter_by(**filters).all()
+        return model.query.all()
+    except Exception as e:
+        print(f"Database error for {model.__name__}: {e}")
+        return []
+
 @app.route('/')
 def home():
-    courses = Course.query.all()
-    mentors = Mentor.query.all()
-    testimonials = Testimonial.query.all()
-    programs = Program.query.filter_by(is_active=True).all()
-    services = Service.query.filter_by(is_active=True).all()
-    team_members = TeamMember.query.filter_by(is_active=True).all()
-    statistics = Statistics.query.filter_by(is_active=True).all()
+    courses = get_data_or_empty(Course)
+    mentors = get_data_or_empty(Mentor)
+    testimonials = get_data_or_empty(Testimonial)
+    programs = get_data_or_empty(Program, is_active=True)
+    services = get_data_or_empty(Service, is_active=True)
+    team_members = get_data_or_empty(TeamMember, is_active=True)
+    statistics = get_data_or_empty(Statistics, is_active=True)
     
     return render_template('index.html', 
                          courses=courses, 
@@ -130,9 +142,14 @@ def home():
 
 @app.route('/course/<int:course_id>')
 def course_detail(course_id):
-    course = Course.query.get_or_404(course_id)
-    faqs = FAQ.query.filter_by(course_id=course_id).all()
-    articles = Article.query.filter_by(course_id=course_id).all()
+    try:
+        course = Course.query.get_or_404(course_id)
+        faqs = FAQ.query.filter_by(course_id=course_id).all()
+        articles = Article.query.filter_by(course_id=course_id).all()
+    except Exception as e:
+        flash('Course not found or database error', 'error')
+        return redirect(url_for('home'))
+    
     return render_template('course_detail.html', 
                          course=course,
                          faqs=faqs,
@@ -141,7 +158,11 @@ def course_detail(course_id):
 
 @app.route('/enroll/<int:course_id>')
 def enroll(course_id):
-    course = Course.query.get_or_404(course_id)
+    try:
+        course = Course.query.get_or_404(course_id)
+    except Exception as e:
+        flash('Course not found', 'error')
+        return redirect(url_for('home'))
     return render_template('enrollment.html', course=course)
 
 @app.route('/submit-enrollment', methods=['POST'])
@@ -153,9 +174,9 @@ def submit_enrollment():
 
 @app.route('/programs')
 def programs():
-    skill_up = Program.query.filter_by(category='Skill Up', is_active=True).all()
-    level_up = Program.query.filter_by(category='Level Up', is_active=True).all()
-    update_yourself = Program.query.filter_by(category='Update Yourself', is_active=True).all()
+    skill_up = get_data_or_empty(Program, category='Skill Up', is_active=True)
+    level_up = get_data_or_empty(Program, category='Level Up', is_active=True)
+    update_yourself = get_data_or_empty(Program, category='Update Yourself', is_active=True)
     
     return render_template('programs.html',
                          skill_up=skill_up,
@@ -164,8 +185,8 @@ def programs():
 
 @app.route('/about')
 def about():
-    team_members = TeamMember.query.filter_by(is_active=True).all()
-    statistics = Statistics.query.filter_by(is_active=True).all()
+    team_members = get_data_or_empty(TeamMember, is_active=True)
+    statistics = get_data_or_empty(Statistics, is_active=True)
     return render_template('about.html',
                          team_members=team_members,
                          statistics=statistics)
@@ -183,5 +204,8 @@ def submit_contact():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+        except Exception as e:
+            print(f"Database creation error: {e}")
     app.run(debug=True) 
