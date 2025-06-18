@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail, Message
 from datetime import datetime
 import os
 from dotenv import load_dotenv
@@ -8,6 +9,16 @@ load_dotenv()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'your-secret-key')
+
+# Email configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME', 'onepercentage51@gmail.com')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD', '')  # App password will be set in .env
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME', 'onepercentage51@gmail.com')
+
+mail = Mail(app)
 
 # Database configuration for both development and production
 database_url = os.getenv('DATABASE_URL')
@@ -195,8 +206,63 @@ def contact():
 @app.route('/submit-contact', methods=['POST'])
 def submit_contact():
     if request.method == 'POST':
-        # Process contact form
-        flash('Thank you for your message! We will get back to you soon.', 'success')
+        try:
+            # Get form data
+            name = request.form.get('name')
+            email = request.form.get('email')
+            phone = request.form.get('phone', '')
+            subject = request.form.get('subject')
+            message = request.form.get('message')
+            
+            # Validate required fields
+            if not all([name, email, subject, message]):
+                if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                    return {'error': 'Please fill in all required fields'}, 400
+                flash('Please fill in all required fields', 'error')
+                return redirect(url_for('contact'))
+            
+            # Create email subject
+            email_subject = f"Contact Form: {subject} - {name}"
+            
+            # Create email body
+            email_body = f"""
+New contact form submission from One Percentage website:
+
+Name: {name}
+Email: {email}
+Phone: {phone}
+Subject: {subject}
+
+Message:
+{message}
+
+---
+This email was sent from the contact form on the One Percentage website.
+            """
+            
+            # Create and send email
+            msg = Message(
+                subject=email_subject,
+                recipients=['onepercentageedu@gmail.com'],
+                body=email_body
+            )
+            
+            mail.send(msg)
+            
+            # Check if it's an AJAX request
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return {'success': 'Message sent successfully!'}, 200
+            
+            flash('Thank you for your message! We will get back to you soon.', 'success')
+            
+        except Exception as e:
+            print(f"Email error: {e}")
+            
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return {'error': 'Sorry, there was an error sending your message. Please try again or contact us directly.'}, 500
+            
+            flash('Sorry, there was an error sending your message. Please try again or contact us directly.', 'error')
+        
         return redirect(url_for('contact'))
 
 @app.route('/seed')

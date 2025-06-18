@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Programs - Cybernaut Edu-Tech{% endblock %}
+{% block title %}Programs - One Percentage{% endblock %}
 
 {% block content %}
 <!-- Programs Hero Section -->
@@ -23,7 +23,7 @@
                 <img src="{{ url_for('static', filename='images/events/event3.jpg') }}" alt="Event Image 3">
             </div>
             <div class="event-item">
-                <img src="{{ url_for('static', filename='images/events/event1.jpg') }}" alt="Event Image 1">
+                <img src="{{ url_for('static', filename='images/event1.jpg') }}" alt="Event Image 1">
             </div>
             <div class="event-item">
                 <img src="{{ url_for('static', filename='images/events/event2.jpg') }}" alt="Event Image 2">
@@ -218,12 +218,12 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h2 class="section-title">Get your quality<br>Skills Certificate<br>from the Cybernaut</h2>
+                <h2 class="section-title">Get your quality<br>Skills Certificate<br>from One Percentage</h2>
                 <p>Join 5000+ certified professionals</p>
                 <button class="enroll-btn btn-lg" onclick="enrollCourse('Certificate', 0)">Get Started Now</button>
             </div>
             <div class="col-lg-6">
-                <img src="{{ url_for('static', filename='images/certificate.png') }}" alt="Cybernaut Certificate" class="certificate-image">
+                <img src="{{ url_for('static', filename='images/certificate.png') }}" alt="One Percentage Certificate" class="certificate-image">
             </div>
         </div>
     </div>
@@ -636,7 +636,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Enrollment functionality
 function enrollCourse(courseName, price) {
     // Redirect to Google Form for enrollment
-    const googleFormUrl = "https://forms.gle/YOUR_GOOGLE_FORM_ID_HERE"; // Replace with your actual Google Form URL
+    const googleFormUrl = "https://forms.gle/wxcZn59etJasEvHj9"; // One Percentage enrollment form
     window.location.href = googleFormUrl;
 }
 

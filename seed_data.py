@@ -138,11 +138,11 @@ Web3 Development:
             )
         ]
 
-        # Create Testimonials based on Cybernaut website
+        # Create Testimonials based on One Percentage
         testimonials = [
             Testimonial(
                 student_name="Anitha",
-                feedback="Cybernaut transformed my career completely. The hands-on training and real-world projects helped me land my dream job at a top tech company.",
+                feedback="One Percentage transformed my career completely. The hands-on training and real-world projects helped me land my dream job at a top tech company.",
                 rating=5,
                 image_url="anitha.jpg"
             ),
@@ -160,7 +160,7 @@ Web3 Development:
             ),
             Testimonial(
                 student_name="MohanKumar",
-                feedback="Cybernaut's approach to learning is unique. They focus on creating leaders, not just employees. This mindset has helped me excel in my career.",
+                feedback="One Percentage's approach to learning is unique. They focus on creating leaders, not just employees. This mindset has helped me excel in my career.",
                 rating=5,
                 image_url="mohankumar.jpg"
             )
@@ -243,7 +243,7 @@ Web3 Development:
             db.session.add(article)
 
         db.session.commit()
-        print("Database seeded successfully with exact Cybernaut content!")
+        print("Database seeded successfully with exact One Percentage content!")
 
 if __name__ == "__main__":
     seed_database() 

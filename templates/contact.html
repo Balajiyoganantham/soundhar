@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Contact Us - Cybernaut Edu-Tech{% endblock %}
+{% block title %}Contact Us - One Percentage{% endblock %}
 
 {% block content %}
 <!-- Contact Hero Section -->
@@ -43,7 +43,7 @@
                         <i class="fas fa-envelope"></i>
                     </div>
                     <h4>Email Address</h4>
-                    <p><a href="mailto:contact@cybernaut.co.in">contact@cybernaut.co.in</a></p>
+                    <p><a href="mailto:contact@onepercentage.in">contact@onepercentage.in</a></p>
                 </div>
             </div>
         </div>
@@ -59,7 +59,34 @@
                     <h2 class="section-title text-center">Send us a Message</h2>
                     <p class="section-subtitle text-center">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
                     
-                    <form method="POST" action="{{ url_for('submit_contact') }}" class="contact-form">
+                    <!-- Flash Messages -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                                    <i class="fas fa-{{ 'check-circle' if category == 'success' else 'exclamation-circle' }} me-2"></i>
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                    
+                    <!-- Success Message (hidden by default) -->
+                    <div id="success-message" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none;">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <strong>Message sent successfully!</strong> Thank you for contacting us. We'll get back to you soon.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    
+                    <!-- Error Message (hidden by default) -->
+                    <div id="error-message" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none;">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        <strong>Error!</strong> Sorry, there was an error sending your message. Please try again or contact us directly.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    
+                    <form method="POST" action="{{ url_for('submit_contact') }}" class="contact-form" id="contactForm">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -100,7 +127,12 @@
                             <textarea id="message" name="message" rows="5" class="form-control" placeholder="Tell us more about your inquiry..." required></textarea>
                         </div>
                         <div class="form-group text-center">
-                            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                            <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                <span id="submitText">Send Message</span>
+                                <span id="submitSpinner" class="spinner-border spinner-border-sm ms-2" role="status" style="display: none;">
+                                    <span class="visually-hidden">Loading...</span>
+                                </span>
+                            </button>
                         </div>
                     </form>
                 </div>

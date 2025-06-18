@@ -307,4 +307,144 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         document.body.appendChild(progressBar);
     }
+});
+
+// Contact form handling
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const submitBtn = document.getElementById('submitBtn');
+    const submitText = document.getElementById('submitText');
+    const submitSpinner = document.getElementById('submitSpinner');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.textContent = 'Sending...';
+            submitSpinner.style.display = 'inline-block';
+            
+            // Hide any existing messages
+            if (successMessage) successMessage.style.display = 'none';
+            if (errorMessage) errorMessage.style.display = 'none';
+            
+            // Get form data
+            const formData = new FormData(contactForm);
+            
+            // Submit form
+            fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message
+                    if (successMessage) {
+                        successMessage.style.display = 'block';
+                        successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Show toast notification
+                    showToast('Message sent successfully! We\'ll get back to you soon.', 'success');
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                
+                // Show error message
+                if (errorMessage) {
+                    errorMessage.style.display = 'block';
+                    errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                
+                // Show toast notification
+                showToast('Error sending message. Please try again.', 'error');
+            })
+            .finally(() => {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitText.textContent = 'Send Message';
+                submitSpinner.style.display = 'none';
+            });
+        });
+    }
+    
+    // Auto-hide alerts after 5 seconds
+    const alerts = document.querySelectorAll('.alert');
+    alerts.forEach(alert => {
+        setTimeout(() => {
+            if (alert.style.display !== 'none') {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            }
+        }, 5000);
+    });
+});
+
+// Counter animation and pop effect for hero stats
+function animateCounter(el, target, suffix = '', duration = 1200) {
+    let start = 0;
+    let startTime = null;
+    function animate(ts) {
+        if (!startTime) startTime = ts;
+        const progress = Math.min((ts - startTime) / duration, 1);
+        const value = Math.floor(progress * target);
+        el.textContent = value + suffix;
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            el.textContent = target + suffix;
+        }
+    }
+    requestAnimationFrame(animate);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Animate stats on load
+    const statStudents = document.getElementById('stat-students');
+    const statMentors = document.getElementById('stat-mentors');
+    const statSuccess = document.getElementById('stat-success');
+    if (statStudents) animateCounter(statStudents, 5000, '+');
+    if (statMentors) animateCounter(statMentors, 50, '+');
+    if (statSuccess) animateCounter(statSuccess, 95, '%');
+
+    // Pop effect on click/touch
+    document.querySelectorAll('.stat-counter').forEach(function(el) {
+        el.addEventListener('click', function() {
+            el.style.transform = 'scale(1.18)';
+            setTimeout(() => { el.style.transform = 'scale(1)'; }, 180);
+        });
+        el.addEventListener('touchstart', function() {
+            el.style.transform = 'scale(1.18)';
+            setTimeout(() => { el.style.transform = 'scale(1)'; }, 180);
+        });
+    });
+
+    // Smooth scroll for hero buttons
+    document.querySelectorAll('.hero-scroll').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            const href = btn.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
 }); 

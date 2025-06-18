@@ -1,6 +1,6 @@
-# Full Stack Development Academy Website
+# One Percentage Academy Website
 
-A modern, responsive website for a Full Stack Development Academy built with Flask and Bootstrap 5. The website features course listings, mentor profiles, student testimonials, and a secure payment integration with Razorpay.
+A modern, responsive website for One Percentage built with Flask and Bootstrap 5. The website features course listings, mentor profiles, student testimonials, and contact form with email functionality.
 
 ## Features
 
@@ -10,9 +10,10 @@ A modern, responsive website for a Full Stack Development Academy built with Fla
 - Detailed course pages with curriculum
 - Mentor profiles showcase
 - Student testimonials
-- Secure payment integration with Razorpay
-- Post-enrollment form with file upload
+- **Enhanced contact form with real-time feedback and email functionality**
 - WhatsApp group integration
+- **Success/error message display on contact form submission**
+- **Loading states and form validation**
 
 ## Tech Stack
 
@@ -29,17 +30,15 @@ A modern, responsive website for a Full Stack Development Academy built with Fla
   - Flask
   - SQLAlchemy
   - Flask-WTF
+  - Flask-Mail
   - Pillow (for image handling)
-
-- **Payment Integration:**
-  - Razorpay
 
 ## Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/fullstack-academy.git
-cd fullstack-academy
+git clone https://github.com/yourusername/onepercentage-academy.git
+cd onepercentage-academy
 ```
 
 2. Create a virtual environment:
@@ -54,10 +53,30 @@ pip install -r requirements.txt
 ```
 
 4. Set up environment variables:
-```bash
-cp .env.example .env
-# Edit .env with your configuration
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Flask Configuration
+FLASK_APP=app.py
+FLASK_ENV=development
+SECRET_KEY=your-secret-key-here
+
+# Database Configuration
+DATABASE_URL=sqlite:///C:/Users/balaj/db/mydb.db
+
+# Email Configuration
+MAIL_USERNAME=onepercentage51@gmail.com
+MAIL_PASSWORD=your-app-password-here
 ```
+
+**Important Email Setup:**
+- The contact form sends emails from `onepercentage51@gmail.com` to `onepercentageedu@gmail.com`
+- You need to generate an App Password for Gmail:
+  1. Go to your Google Account settings
+  2. Enable 2-Step Verification if not already enabled
+  3. Go to Security → App passwords
+  4. Generate a new app password for "Mail"
+  5. Use this app password in the `MAIL_PASSWORD` environment variable
 
 5. Initialize the database:
 ```bash
@@ -74,10 +93,10 @@ flask run
 ## Project Structure
 
 ```
-fullstack-academy/
+onepercentage-academy/
 ├── app.py              # Main application file
 ├── requirements.txt    # Python dependencies
-├── .env               # Environment variables
+├── .env               # Environment variables (create this file)
 ├── static/
 │   ├── css/
 │   │   └── style.css  # Custom styles
@@ -99,8 +118,8 @@ Create a `.env` file in the root directory with the following variables:
 FLASK_APP=app.py
 FLASK_ENV=development
 SECRET_KEY=your-secret-key
-RAZORPAY_KEY_ID=your-razorpay-key-id
-RAZORPAY_KEY_SECRET=your-razorpay-key-secret
+MAIL_USERNAME=onepercentage51@gmail.com
+MAIL_PASSWORD=your-app-password
 ```
 
 ## Development
@@ -122,6 +141,10 @@ The application can be deployed to any platform that supports Python/Flask appli
 - AWS Elastic Beanstalk
 - Google Cloud Platform
 
+**For Render deployment:**
+- Add the environment variables in the Render dashboard
+- Set `MAIL_USERNAME` and `MAIL_PASSWORD` in the environment variables section
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -130,6 +153,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - Bootstrap team for the amazing framework
 - Flask team for the excellent web framework
-- Razorpay for the payment integration
 - Font Awesome for the icons
 - All contributors who have helped with the project 
