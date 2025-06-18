@@ -15,9 +15,12 @@ if database_url:
     # Production (Render) - PostgreSQL
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-else:
-    # Development (local) - SQLite
+elif os.path.exists(r'C:/Users/balaj/db/mydb.db'):
+    # Development (local) - SQLite file
     app.config['SQLALCHEMY_DATABASE_URI'] = r'sqlite:///C:/Users/balaj/db/mydb.db'
+else:
+    # Fallback - In-memory SQLite for testing
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 
 db = SQLAlchemy(app)
 
@@ -201,6 +204,19 @@ def submit_contact():
         # Process contact form
         flash('Thank you for your message! We will get back to you soon.', 'success')
         return redirect(url_for('contact'))
+
+@app.route('/seed')
+def seed_database():
+    """Seed the database with sample data"""
+    try:
+        with app.app_context():
+            db.create_all()
+            from seed_data import seed_database as seed
+            seed()
+        flash('Database seeded successfully!', 'success')
+    except Exception as e:
+        flash(f'Error seeding database: {str(e)}', 'error')
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     with app.app_context():
