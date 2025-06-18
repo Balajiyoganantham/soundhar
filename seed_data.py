@@ -108,10 +108,10 @@ Web3 Development:
 
         # Create Statistics based on Cybernaut website
         statistics = [
-            Statistics(name="Students Trained", value=100000, icon="👥"),  # 1L+ students
-            Statistics(name="Events Conducted", value=75000, icon="🎪"),  # 75K+ events
+            Statistics(name="Students Trained", value=1000, icon="👥"),  # 1000+ students
+            Statistics(name="Colleges Supported", value=50, icon="🏫"),  # 50+ colleges
+            Statistics(name="MOE Signed", value=10, icon="🤝"),  # 10+ MOE
             Statistics(name="Google Rating", value=48, icon="⭐"),  # 4.8 rating
-            Statistics(name="MOU Signed", value=15, icon="🤝"),  # 15+ MOUs
             Statistics(name="Outreach Programs", value=100, icon="🌍"),  # 100+ programs
             Statistics(name="Years of Impact", value=5, icon="⭐")  # 5 years
         ]
