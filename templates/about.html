@@ -1,0 +1,499 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - Cybernaut Edu-Tech{% endblock %}
+
+{% block content %}
+<!-- About Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h1 class="hero-title">About Cybernaut Edu-Tech</h1>
+                <p class="hero-subtitle">Empowering learners with hands-on training, future-ready tools, and expert guidance to excel in top tech companies like MAANG.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Content Section -->
+<section class="about-content-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <img src="{{ url_for('static', filename='images/students-classroom.jpg') }}" alt="Students in a classroom" class="about-image">
+            </div>
+            <div class="col-lg-6">
+                <h3>About Us</h3>
+                <h2 class="section-title">Edu-Tech Platform for Skill Development</h2>
+                <p>Cybernaut Edu-Tech empowers learners with hands-on training, future-ready tools, and expert guidance to excel in top tech companies like MAANG.</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <h4>Innovative Learning</h4>
+                        <p>Hands-on training, AI-driven tools, and real-world projects to build future-ready skills and industry expertise.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Career Success</h4>
+                        <p>Partnered with 50+ institutions, shaping the next-gen tech leaders with guidance for MAANG and top-tier opportunities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="statistics-section">
+    <div class="container">
+        <h2 class="section-title text-center">Our Impact in Numbers</h2>
+        <div class="stats-grid">
+            {% for stat in statistics %}
+            <div class="stat-card">
+                <div class="stat-icon">{{ stat.icon }}</div>
+                <div class="stat-number" data-count="{{ stat.value }}">0</div>
+                <div class="stat-label">{{ stat.name }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+    <div class="container">
+        <h2 class="section-title text-center">Meet Our Leadership</h2>
+        <p class="section-subtitle text-center">Visionary leaders driving innovation in tech education</p>
+        
+        <div class="team-grid">
+            {% for member in team_members %}
+            <div class="team-card">
+                <img src="{{ url_for('static', filename='images/team/' + member.image_url) }}" alt="{{ member.name }}">
+                <h4>{{ member.name }}</h4>
+                <p class="position">{{ member.position }}</p>
+                <p class="bio">{{ member.bio }}</p>
+                <div class="social-links">
+                    {% if member.linkedin_url %}
+                    <a href="{{ member.linkedin_url }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    {% endif %}
+                    {% if member.twitter_url %}
+                    <a href="{{ member.twitter_url }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Vision Mission Section -->
+<section class="vision-mission-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="vision-card">
+                    <h3>Our Vision</h3>
+                    <p>This clan embraces the motto: "Create leaders, not employees."</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mission-card">
+                    <h3>Our Mission</h3>
+                    <p>Connect. Collaborate. Create.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Accreditation Section -->
+<section class="accreditation-section">
+    <div class="container">
+        <h2 class="section-title text-center">We are accredited by</h2>
+        <div class="accreditation-grid">
+            <div class="accreditation-item">
+                <img src="{{ url_for('static', filename='images/accreditation/mca.png') }}" alt="Ministry of Corporate Affairs">
+            </div>
+            <div class="accreditation-item">
+                <img src="{{ url_for('static', filename='images/accreditation/dpiit.png') }}" alt="Department for Promotion of Industry and Internal Trade">
+            </div>
+            <div class="accreditation-item">
+                <img src="{{ url_for('static', filename='images/accreditation/startup-india.png') }}" alt="Startup India">
+            </div>
+            <div class="accreditation-item">
+                <img src="{{ url_for('static', filename='images/accreditation/iso.png') }}" alt="ISO 9001:2015 Certified">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="cta-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2>Ready to Join Our Community?</h2>
+                <p>Connect with top tech minds and access exclusive resources. You don't just learn innovation—you build it!</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary btn-lg">Get Started Today</a>
+                    <a href="tel:+916382055035" class="btn btn-secondary btn-lg">Call Us Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.about-content-section {
+    padding: 80px 0;
+    background: var(--background-alt);
+}
+
+.about-content-section h3 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.about-content-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+}
+
+.about-image {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.features {
+    margin: 2rem 0;
+}
+
+.feature-item {
+    margin-bottom: 2rem;
+}
+
+.feature-item h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.feature-item p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.statistics-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.statistics-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.stat-card {
+    background: var(--background-alt);
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.team-section {
+    padding: 80px 0;
+    background: var(--background-alt);
+}
+
+.team-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.team-section .section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.team-card {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.team-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 4px solid white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.team-card h4 {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.team-card .position {
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.team-card .bio {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+}
+
+.vision-mission-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.vision-card, .mission-card {
+    background: var(--background-alt);
+    padding: 3rem;
+    border-radius: 12px;
+    text-align: center;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.vision-card:hover, .mission-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.vision-card h3, .mission-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.vision-card p, .mission-card p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.accreditation-section {
+    padding: 80px 0;
+    background: var(--background-alt);
+}
+
+.accreditation-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+}
+
+.accreditation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    align-items: center;
+}
+
+.accreditation-item {
+    text-align: center;
+    padding: 2rem;
+}
+
+.accreditation-item img {
+    max-width: 120px;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.accreditation-item:hover img {
+    filter: grayscale(0%);
+}
+
+.cta-section {
+    padding: 80px 0;
+    background: var(--primary-color);
+    color: white;
+}
+
+.cta-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.cta-section p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .vision-card, .mission-card {
+        margin-bottom: 2rem;
+    }
+    
+    .accreditation-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .accreditation-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Counter Animation
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-count'));
+        const increment = target / 200;
+        let current = 0;
+        
+        const updateCounter = () => {
+            if (current < target) {
+                current += increment;
+                counter.textContent = Math.ceil(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target;
+            }
+        };
+        
+        updateCounter();
+    });
+}
+
+// Intersection Observer for animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            if (entry.target.classList.contains('statistics-section')) {
+                animateCounters();
+            }
+            entry.target.classList.add('fade-in-up');
+        }
+    });
+}, { threshold: 0.1 });
+
+// Observe elements for animation
+document.querySelectorAll('.statistics-section, .team-card, .vision-card, .mission-card').forEach(el => {
+    observer.observe(el);
+});
+</script>
+{% endblock %} 

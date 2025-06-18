@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Course Information -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h1 class="card-title mb-4">{{ course.title }}</h1>
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="me-4">
+                            <span class="text-muted">Rating:</span>
+                            <div class="text-warning d-inline-block ms-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="text-dark ms-2">(4.7)</span>
+                            </div>
+                        </div>
+                        <div class="me-4">
+                            <i class="fas fa-users text-primary"></i>
+                            <span class="ms-2">439,709 students</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-clock text-primary"></i>
+                            <span class="ms-2">{{ course.duration }}</span>
+                        </div>
+                    </div>
+
+                    <div class="course-description mb-4">
+                        {{ course.description }}
+                    </div>
+
+                    <h4 class="mb-3">What You'll Learn</h4>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Build 16 web development projects for your portfolio
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Master frontend technologies
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Learn JavaScript ES6 and modern features
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Develop full-stack applications
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Implement authentication and security
+                                </li>
+                                <li class="mb-2">
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    Deploy applications to production
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4 class="mb-3">Course Content</h4>
+                    <div class="accordion mb-4" id="courseContent">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#section1">
+                                    Section 1: Introduction to Web Development
+                                </button>
+                            </h2>
+                            <div id="section1" class="accordion-collapse collapse show">
+                                <div class="accordion-body">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">
+                                            <i class="fas fa-play-circle me-2"></i>
+                                            Getting Started with HTML5
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-play-circle me-2"></i>
+                                            CSS3 Fundamentals
+                                        </li>
+                                        <li class="mb-2">
+                                            <i class="fas fa-play-circle me-2"></i>
+                                            JavaScript Basics
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more accordion items for other sections -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enrollment Card -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm enrollment-card">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <h3 class="card-title mb-3">Enroll Now</h3>
+                        <div class="price-tag">
+                            <span class="h2">${{ "%.2f"|format(course.price) }}</span>
+                        </div>
+                    </div>
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2">
+                            <i class="fas fa-infinity text-primary me-2"></i>
+                            Full lifetime access
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-mobile-alt text-primary me-2"></i>
+                            Access on mobile and desktop
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-certificate text-primary me-2"></i>
+                            Certificate of completion
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-comments text-primary me-2"></i>
+                            Direct mentor support
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary w-100 mb-3" onclick="startEnrollment()">
+                        Enroll Now
+                    </button>
+                    <p class="text-center text-muted small mb-0">
+                        30-Day Money-Back Guarantee
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Enrollment Modal -->
+<div class="modal fade" id="enrollmentModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Complete Your Enrollment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="enrollmentForm" action="{{ url_for('submit_enrollment') }}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="course_id" value="{{ course.id }}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reg_number" class="form-label">Registration Number</label>
+                        <input type="text" class="form-control" id="reg_number" name="reg_number" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mobile" class="form-label">Mobile Number</label>
+                        <input type="tel" class="form-control" id="mobile" name="mobile" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="transaction_id" class="form-label">Transaction ID</label>
+                        <input type="text" class="form-control" id="transaction_id" name="transaction_id" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="screenshot" class="form-label">Transaction Screenshot</label>
+                        <input type="file" class="form-control" id="screenshot" name="screenshot" accept="image/*" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="enrollmentForm" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+function startEnrollment() {
+    var options = {
+        key: "{{ razorpay_key }}",
+        amount: {{ course.price * 100 }},
+        currency: "INR",
+        name: "{{ course.title }}",
+        description: "Course Enrollment",
+        handler: function(response) {
+            document.getElementById('transaction_id').value = response.razorpay_payment_id;
+            $('#enrollmentModal').modal('show');
+        },
+        prefill: {
+            name: "",
+            email: "",
+            contact: ""
+        },
+        theme: {
+            color: "#0d6efd"
+        }
+    };
+    var rzp = new Razorpay(options);
+    rzp.open();
+}
+</script>
+{% endblock %} 

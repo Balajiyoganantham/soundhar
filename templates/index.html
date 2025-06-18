@@ -1,0 +1,513 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="hero-title">Boost Up and Build Your Tech Career with our Courses</h1>
+                    <p class="hero-subtitle">Learn to code, build innovative solutions, and shape the digital future. Every line you write brings you closer to new possibilities and powers the next big breakthrough. Step into the world of tech—your adventure begins now!</p>
+                    <div class="hero-cta">
+                        <a href="#contact" class="btn btn-primary">Contact us</a>
+                        <a href="#solutions" class="btn btn-secondary">Explore Solutions</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-stats">
+                    <div class="students-trusted">
+                        <h6>Students Trusted on</h6>
+                        <div class="trusted-students">
+                            <span>Anitha</span>
+                            <span>Rajkumar</span>
+                            <span>Kavitha</span>
+                            <span>MohanKumar</span>
+                        </div>
+                    </div>
+                    <div class="hero-numbers">
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="100000">0</div>
+                            <div class="stat-label">Students Trained</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-count="75000">0</div>
+                            <div class="stat-label">Events Conducted</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Event Gallery Section -->
+<section id="events" class="event-gallery">
+    <div class="container">
+        <div class="event-slider">
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event1.jpg') }}" alt="Event Image 1">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event2.jpg') }}" alt="Event Image 2">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event3.jpg') }}" alt="Event Image 3">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event4.jpg') }}" alt="Event Image 4">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event5.jpg') }}" alt="Event Image 5">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event6.jpg') }}" alt="Event Image 6">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event7.jpg') }}" alt="Event Image 7">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Connecting Minds Section -->
+<section id="connecting-minds" class="connecting-minds">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title">Connecting Minds, Collaborating on Ideas, and Creating the Future</h2>
+                <p class="section-subtitle">Boost Up and Build Your Tech Career with our Courses</p>
+                <p>Learn to code, build innovative solutions, and shape the digital future. Every line you write brings you closer to new possibilities and powers the next big breakthrough. Step into the world of tech—your adventure begins now!</p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Contact us</a>
+                    <a href="#solutions" class="btn btn-secondary">Explore Solutions</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="event-gallery-mini">
+                    <div class="event-item">
+                        <img src="{{ url_for('static', filename='images/events/event1.jpg') }}" alt="Event Image 1">
+                    </div>
+                    <div class="event-item">
+                        <img src="{{ url_for('static', filename='images/events/event2.jpg') }}" alt="Event Image 2">
+                    </div>
+                    <div class="event-item">
+                        <img src="{{ url_for('static', filename='images/events/event3.jpg') }}" alt="Event Image 3">
+                    </div>
+                    <div class="event-item">
+                        <img src="{{ url_for('static', filename='images/events/event4.jpg') }}" alt="Event Image 4">
+                    </div>
+                    <div class="event-item">
+                        <img src="{{ url_for('static', filename='images/events/event5.jpg') }}" alt="Event Image 5">
+                    </div>
+                    <div class="event-item">
+                        <img src="{{ url_for('static', filename='images/events/event6.jpg') }}" alt="Event Image 6">
+                    </div>
+                    <div class="event-item">
+                        <img src="{{ url_for('static', filename='images/events/event7.jpg') }}" alt="Event Image 7">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Milestones Section -->
+<section id="milestones" class="milestones">
+    <div class="container">
+        <h2 class="section-title">MILESTONES</h2>
+        <div class="milestones-grid">
+            <div class="milestone-item">
+                <div class="milestone-number" data-count="4.8">0</div>
+                <div class="milestone-label">Google Ratings</div>
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-number" data-count="15">0</div>
+                <div class="milestone-label">MOU Signed</div>
+            </div>
+            <div class="milestone-item">
+                <div class="milestone-number" data-count="100">0</div>
+                <div class="milestone-label">Outreach Programs</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MOU Partners Section -->
+<section id="mou-partners" class="mou-partners">
+    <div class="container">
+        <h2 class="section-title">OUR MOU PARTNERS</h2>
+        <p class="section-subtitle">At Cybernaut Edu-Tech, we offer premier educational solutions, including products, services, and training programs. Partner with us to enhance your institution's learning experience.</p>
+        <div class="partners-grid">
+            <div class="partner-item">
+                <img src="{{ url_for('static', filename='images/partners/partner1.png') }}" alt="Partner 1">
+            </div>
+            <div class="partner-item">
+                <img src="{{ url_for('static', filename='images/partners/partner2.png') }}" alt="Partner 2">
+            </div>
+            <div class="partner-item">
+                <img src="{{ url_for('static', filename='images/partners/partner3.png') }}" alt="Partner 3">
+            </div>
+            <div class="partner-item">
+                <img src="{{ url_for('static', filename='images/partners/partner4.png') }}" alt="Partner 4">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Us Section -->
+<section id="about" class="about-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <img src="{{ url_for('static', filename='images/students-classroom.jpg') }}" alt="Students in a classroom" class="about-image">
+            </div>
+            <div class="col-lg-6">
+                <h3>About Us</h3>
+                <h2 class="section-title">Edu-Tech Platform for Skill Development</h2>
+                <p>Cybernaut Edu-Tech empowers learners with hands-on training, future-ready tools, and expert guidance to excel in top tech companies like MAANG.</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <h4>Innovative Learning</h4>
+                        <p>Hands-on training, AI-driven tools, and real-world projects to build future-ready skills and industry expertise.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Career Success</h4>
+                        <p>Partnered with 50+ institutions, shaping the next-gen tech leaders with guidance for MAANG and top-tier opportunities.</p>
+                    </div>
+                </div>
+                
+                <a href="{{ url_for('about') }}" class="btn btn-primary">View More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Accreditation Section -->
+<section id="accreditation" class="accreditation">
+    <div class="container">
+        <h2 class="section-title">We are accredited by</h2>
+        <div class="accreditation-grid">
+            <div class="accreditation-item">
+                <img src="{{ url_for('static', filename='images/accreditation/mca.png') }}" alt="Ministry of Corporate Affairs">
+            </div>
+            <div class="accreditation-item">
+                <img src="{{ url_for('static', filename='images/accreditation/dpiit.png') }}" alt="Department for Promotion of Industry and Internal Trade">
+            </div>
+            <div class="accreditation-item">
+                <img src="{{ url_for('static', filename='images/accreditation/startup-india.png') }}" alt="Startup India">
+            </div>
+            <div class="accreditation-item">
+                <img src="{{ url_for('static', filename='images/accreditation/iso.png') }}" alt="ISO 9001:2015 Certified">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Vision Success Section -->
+<section id="vision-success" class="vision-success">
+    <div class="container">
+        <h2 class="section-title">Their Vision, Our Success!</h2>
+        <p class="section-subtitle">At Cybernaut Edu-Tech, we're shaping futures with long-term programs in top institutions.<br>It's not a moment, it's a movement!</p>
+        
+        <div class="institution-carousel">
+            <div class="institution-item active">
+                <h3>Kings Engineering College</h3>
+                <p>Chennai</p>
+            </div>
+            <div class="institution-item">
+                <h3>SRM Institute Of Science And Technology</h3>
+                <p>Ramapuram, Chennai</p>
+            </div>
+            <div class="institution-item">
+                <h3>Sri Sivasubramaniya Nadar College of Engineering</h3>
+                <p>Kalavakkam, Chennai</p>
+            </div>
+        </div>
+        
+        <div class="carousel-controls">
+            <button class="prev-btn">Previous</button>
+            <button class="next-btn">Next</button>
+        </div>
+    </div>
+</section>
+
+<!-- Learning Section -->
+<section id="learning" class="learning-section">
+    <div class="container">
+        <h2 class="section-title">Learn. Practice. Earn.<br>Have Fun!</h2>
+        
+        <div class="learning-tabs">
+            <button class="tab-btn active" data-tab="online">Online</button>
+            <button class="tab-btn" data-tab="offline">Offline</button>
+        </div>
+        
+        <div class="tab-content active" id="online">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h3>Hi Sagos</h3>
+                    <h3>Hello Sagos</h3>
+                    <p>Experience 120 minutes of immersive, hands-on learning everyday. Sharpen your tech skills, solve real-world problems, and challenge your limits—all from the comfort of your home. Stay ahead of the curve and transform your potential into mastery.</p>
+                    <div class="hero-cta">
+                        <a href="{{ url_for('programs') }}" class="btn btn-primary">View More</a>
+                        <a href="#enroll" class="btn btn-secondary">Get Started</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="tech-categories">
+                        <div class="tech-category">
+                            <h4>Tech Trio</h4>
+                        </div>
+                        <div class="tech-category">
+                            <h4>UX Design</h4>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Full Stack</h4>
+                        </div>
+                        <div class="tech-category">
+                            <h4>Data Analytics</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Student Community Section -->
+<section id="student-community" class="student-community">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title">Cybernaut Developers Student Community</h2>
+                <p>Connect with top tech minds and access exclusive resources. you don't just learn innovation—you build it!</p>
+                
+                <div class="community-info">
+                    <div class="info-item">
+                        <h4>Our Vision</h4>
+                        <p>This clan embraces the motto: "Create leaders, not employees."</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Our Mission</h4>
+                        <p>Connect. Collaborate. Create.</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>Core Activities</h4>
+                        <ul>
+                            <li><strong>Skill Up:</strong> Seminars, workshops, bootcamps, crash courses</li>
+                            <li><strong>Level Up:</strong> Contests, competitions, hackathons</li>
+                            <li><strong>Update Yourself:</strong> Interview series, Tech IR 5.0, tech summits</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <a href="#join" class="btn btn-primary">Become a member</a>
+            </div>
+            <div class="col-lg-6">
+                <img src="{{ url_for('static', filename='images/students-collaborating.jpg') }}" alt="Students collaborating" class="community-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section id="blog" class="blog-section">
+    <div class="container">
+        <h2 class="section-title">Explore the Blog</h2>
+        <p class="section-subtitle">Discover the latest handpicked blog entries to get started</p>
+        
+        <div class="blog-grid">
+            <div class="blog-item">
+                <p>No posts found.</p>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <a href="#blog" class="btn btn-primary">Check our Blogs</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials-section">
+    <div class="container">
+        <h2 class="section-title">Don't just take our word for it,<br>Hear from our students.</h2>
+        <p class="section-subtitle">Our students' success stories speak volumes about the quality of our programs and mentorship.</p>
+        
+        <div class="testimonials-grid">
+            {% for testimonial in testimonials %}
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <p>"{{ testimonial.feedback }}"</p>
+                </div>
+                <div class="testimonial-author">
+                    <img src="{{ url_for('static', filename='images/testimonials/' + testimonial.image_url) }}" alt="{{ testimonial.student_name }}">
+                    <div class="author-info">
+                        <h5>{{ testimonial.student_name }}</h5>
+                        {% if testimonial.position %}
+                        <p>{{ testimonial.position }} at {{ testimonial.company }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Certificate Section -->
+<section id="certificate" class="certificate-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title">Get your quality<br>Skills Certificate<br>from the Cybernaut</h2>
+                <p>Join 5000+ certified professionals</p>
+                <a href="#enroll" class="btn btn-primary">Get Started Now</a>
+            </div>
+            <div class="col-lg-6">
+                <img src="{{ url_for('static', filename='images/certificate.png') }}" alt="Cybernaut Certificate" class="certificate-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section id="newsletter" class="newsletter-section">
+    <div class="container">
+        <h2 class="section-title">Subscribe to Our Newsletter</h2>
+        <p class="section-subtitle">Stay updated with our latest courses and opportunities</p>
+        
+        <form class="newsletter-form">
+            <div class="input-group">
+                <input type="email" class="form-control" placeholder="Enter your email address">
+                <button type="submit" class="btn btn-primary">Subscribe Now</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Counter Animation
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number, .milestone-number');
+    
+    counters.forEach(counter => {
+        const target = parseFloat(counter.getAttribute('data-count'));
+        const increment = target / 200;
+        let current = 0;
+        
+        const updateCounter = () => {
+            if (current < target) {
+                current += increment;
+                counter.textContent = Math.ceil(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target;
+            }
+        };
+        
+        updateCounter();
+    });
+}
+
+// Institution Carousel
+let currentInstitution = 0;
+const institutions = document.querySelectorAll('.institution-item');
+
+function showInstitution(index) {
+    institutions.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+    });
+}
+
+document.querySelector('.next-btn').addEventListener('click', () => {
+    currentInstitution = (currentInstitution + 1) % institutions.length;
+    showInstitution(currentInstitution);
+});
+
+document.querySelector('.prev-btn').addEventListener('click', () => {
+    currentInstitution = (currentInstitution - 1 + institutions.length) % institutions.length;
+    showInstitution(currentInstitution);
+});
+
+// Learning Tabs
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const tab = btn.getAttribute('data-tab');
+        
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+        
+        btn.classList.add('active');
+        document.getElementById(tab).classList.add('active');
+    });
+});
+
+// Event Gallery Slider
+const eventSlider = document.querySelector('.event-slider');
+if (eventSlider) {
+    let scrollPosition = 0;
+    
+    setInterval(() => {
+        scrollPosition += 1;
+        if (scrollPosition >= eventSlider.scrollWidth - eventSlider.clientWidth) {
+            scrollPosition = 0;
+        }
+        eventSlider.scrollLeft = scrollPosition;
+    }, 50);
+}
+
+// Intersection Observer for animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            if (entry.target.classList.contains('milestones')) {
+                animateCounters();
+            }
+            entry.target.classList.add('fade-in-up');
+        }
+    });
+}, { threshold: 0.1 });
+
+// Observe elements for animation
+document.querySelectorAll('.milestones, .testimonial-card, .blog-item, .partner-item').forEach(el => {
+    observer.observe(el);
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offsetTop = target.offsetTop - 80;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('mainNav');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.classList.add('shadow');
+            navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+        } else {
+            navbar.classList.remove('shadow');
+            navbar.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+        }
+    }
+});
+</script>
+{% endblock %} 

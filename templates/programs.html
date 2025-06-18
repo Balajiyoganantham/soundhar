@@ -1,0 +1,678 @@
+{% extends "base.html" %}
+
+{% block title %}Programs - Cybernaut Edu-Tech{% endblock %}
+
+{% block content %}
+<!-- Programs Hero Section -->
+<section class="programs-hero">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h1 class="hero-title">Our Programs</h1>
+                <p class="hero-subtitle">Choose from our comprehensive range of tech courses designed to accelerate your career</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Event Gallery Section -->
+<section class="event-gallery">
+    <div class="container">
+        <div class="event-slider">
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event3.jpg') }}" alt="Event Image 3">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event1.jpg') }}" alt="Event Image 1">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event2.jpg') }}" alt="Event Image 2">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event3.jpg') }}" alt="Event Image 3">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event1.jpg') }}" alt="Event Image 1">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event2.jpg') }}" alt="Event Image 2">
+            </div>
+            <div class="event-item">
+                <img src="{{ url_for('static', filename='images/events/event3.jpg') }}" alt="Event Image 3">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Category Filters -->
+<section class="category-filters">
+    <div class="container">
+        <div class="filter-tabs">
+            <button class="filter-btn active" data-category="all">All Categories</button>
+            <button class="filter-btn" data-category="online">Online</button>
+            <button class="filter-btn" data-category="offline">Offline</button>
+            <button class="filter-btn" data-category="vac">VAC</button>
+            <button class="filter-btn" data-category="placement">Placement Support</button>
+        </div>
+    </div>
+</section>
+
+<!-- Online Courses Section -->
+<section class="courses-section" id="online-courses">
+    <div class="container">
+        <h2 class="section-title">Online Courses</h2>
+        <div class="courses-grid">
+            <!-- Tech Trio -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/tech-trio.jpg') }}" alt="Tech Trio">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">TechTrio</h3>
+                    <div class="course-details">
+                        <span class="duration">60+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Internship</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">15k Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹2500/-</span>
+                        <span class="original-price">₹5000/-</span>
+                    </div>
+                    <button class="enroll-btn" onclick="enrollCourse('TechTrio', 2500)">Enroll Now</button>
+                </div>
+            </div>
+
+            <!-- UI/UX Design -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/ui-ux-design.jpg') }}" alt="UI/UX Design">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">UIUXDesign</h3>
+                    <div class="course-details">
+                        <span class="duration">60+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Internship</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">9k Enrolled</span>
+                        <span class="rating">4.7/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹3000/-</span>
+                        <span class="original-price">₹5000/-</span>
+                    </div>
+                    <button class="enroll-btn" onclick="enrollCourse('UIUXDesign', 3000)">Enroll Now</button>
+                </div>
+            </div>
+
+            <!-- Full Stack Development -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/full-stack.jpg') }}" alt="Full Stack Development">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">FullStackDevelopment</h3>
+                    <div class="course-details">
+                        <span class="duration">60+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Internship</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">10K Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹3500/-</span>
+                        <span class="original-price">₹5000/-</span>
+                    </div>
+                    <button class="enroll-btn" onclick="enrollCourse('FullStackDevelopment', 3500)">Enroll Now</button>
+                </div>
+            </div>
+
+            <!-- Data Analytics -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/data-analytics.jpg') }}" alt="Data Analytics">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">DataAnalytics</h3>
+                    <div class="course-details">
+                        <span class="duration">60+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Internship</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">10K Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹3500/-</span>
+                        <span class="original-price">₹5000/-</span>
+                    </div>
+                    <button class="enroll-btn" onclick="enrollCourse('DataAnalytics', 3500)">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Offline Courses Section -->
+<section class="courses-section" id="offline-courses">
+    <div class="container">
+        <h2 class="section-title">Offline Courses</h2>
+        <div class="courses-grid">
+            <!-- MetaZen -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/meta-zen.jpg') }}" alt="MetaZen">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Metazen</h3>
+                    <div class="course-details">
+                        <span class="duration">60+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Internship</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">1k Enrolled</span>
+                        <span class="rating">4.9/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹40000/-</span>
+                        <span class="original-price">₹90000/-</span>
+                    </div>
+                    <button class="enroll-btn" onclick="enrollCourse('Metazen', 40000)">Enroll Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VAC Section -->
+<section class="courses-section" id="vac-courses">
+    <div class="container">
+        <h2 class="section-title">Value Added Courses</h2>
+        <div class="coming-soon">
+            <h3>Coming Soon</h3>
+        </div>
+    </div>
+</section>
+
+<!-- Placement Support Section -->
+<section class="courses-section" id="placement-courses">
+    <div class="container">
+        <h2 class="section-title">Placement Support</h2>
+        <div class="coming-soon">
+            <h3>Coming Soon</h3>
+        </div>
+    </div>
+</section>
+
+<!-- Certificate Section -->
+<section class="certificate-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title">Get your quality<br>Skills Certificate<br>from the Cybernaut</h2>
+                <p>Join 5000+ certified professionals</p>
+                <button class="enroll-btn btn-lg" onclick="enrollCourse('Certificate', 0)">Get Started Now</button>
+            </div>
+            <div class="col-lg-6">
+                <img src="{{ url_for('static', filename='images/certificate.png') }}" alt="Cybernaut Certificate" class="certificate-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="newsletter-section">
+    <div class="container">
+        <h2 class="section-title">Subscribe to Our Newsletter</h2>
+        <p class="section-subtitle">Stay updated with our latest courses and opportunities</p>
+        
+        <form class="newsletter-form">
+            <div class="input-group">
+                <input type="email" class="form-control" placeholder="Enter your email address">
+                <button type="submit" class="btn btn-primary">Subscribe Now</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.programs-hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 120px 0 60px;
+    color: white;
+    text-align: center;
+}
+
+.programs-hero .hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.programs-hero .hero-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.event-gallery {
+    padding: 2rem 0;
+    background: white;
+    overflow: hidden;
+}
+
+.event-slider {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 1rem 0;
+}
+
+.event-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.event-item {
+    flex-shrink: 0;
+    width: 200px;
+    height: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.event-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.category-filters {
+    padding: 2rem 0;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.filter-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: var(--background-alt);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.filter-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.courses-section {
+    padding: 4rem 0;
+    background: var(--background-alt);
+}
+
+.courses-section:nth-child(even) {
+    background: white;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.course-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.course-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.course-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.course-content {
+    padding: 1.5rem;
+}
+
+.course-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.course-details {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.course-details span {
+    background: var(--background-alt);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.course-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.enrolled {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.rating {
+    background: var(--accent-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.course-pricing {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.current-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.original-price {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    text-decoration: line-through;
+}
+
+.enroll-btn {
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.enroll-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.coming-soon {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.coming-soon h3 {
+    font-size: 2rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.certificate-section {
+    padding: 4rem 0;
+    background: white;
+}
+
+.certificate-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    text-align: left;
+}
+
+.certificate-image {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.newsletter-section {
+    padding: 4rem 0;
+    background: var(--primary-color);
+    color: white;
+}
+
+.newsletter-section .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.newsletter-section .section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3rem;
+}
+
+.newsletter-form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form .input-group {
+    display: flex;
+    gap: 1rem;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+}
+
+.newsletter-form button {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    background: var(--accent-color);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background: #d97706;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .filter-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .courses-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .course-details {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .newsletter-form .input-group {
+        flex-direction: column;
+    }
+    
+    .programs-hero .hero-title {
+        font-size: 2rem;
+    }
+    
+    .event-item {
+        width: 150px;
+        height: 90px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Category filtering functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const courseCards = document.querySelectorAll('.course-card');
+    const courseSections = document.querySelectorAll('.courses-section');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Show/hide sections based on category
+            courseSections.forEach(section => {
+                if (category === 'all') {
+                    section.style.display = 'block';
+                } else {
+                    const sectionId = section.id;
+                    if (sectionId.includes(category)) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                }
+            });
+            
+            // Filter course cards
+            courseCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+
+// Enrollment functionality
+function enrollCourse(courseName, price) {
+    if (price === 0) {
+        // Certificate or free course
+        window.location.href = "{{ url_for('contact') }}";
+    } else {
+        // Paid course - redirect to contact with course info
+        const message = `I'm interested in enrolling in the ${courseName} course (₹${price})`;
+        const encodedMessage = encodeURIComponent(message);
+        window.location.href = `{{ url_for('contact') }}?course=${encodeURIComponent(courseName)}&price=${price}&message=${encodedMessage}`;
+    }
+}
+
+// Event gallery slider
+const eventSlider = document.querySelector('.event-slider');
+if (eventSlider) {
+    let scrollPosition = 0;
+    
+    setInterval(() => {
+        scrollPosition += 1;
+        if (scrollPosition >= eventSlider.scrollWidth - eventSlider.clientWidth) {
+            scrollPosition = 0;
+        }
+        eventSlider.scrollLeft = scrollPosition;
+    }, 50);
+}
+
+// Smooth scrolling for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offsetTop = target.offsetTop - 80;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+</script>
+{% endblock %} 

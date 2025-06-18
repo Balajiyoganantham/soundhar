@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cybernaut Edu-Tech - Boost Your Tech Career{% endblock %}</title>
+    <meta name="description" content="Learn to code with hands-on training, AI-driven tools, and expert guidance to excel in top tech companies like MAANG.">
+    <meta name="keywords" content="coding bootcamp, tech training, MAANG preparation, programming courses">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="{{ url_for('home') }}">
+                <i class="fas fa-rocket text-primary me-2"></i>
+                <span class="brand-text fw-bold">Cybernaut Edu-Tech</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('about') }}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('programs') }}">Programs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">Blogs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary ms-2" href="{{ url_for('contact') }}">Get in Touch</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-brand mb-3">
+                        <i class="fas fa-rocket text-primary me-2"></i>
+                        <span class="brand-text fw-bold">Cybernaut Edu-Tech</span>
+                    </div>
+                    <address class="text-light">
+                        <p class="mb-2">43/a, Nehru Nagar, Rayanur,<br>Thoronakkalpatti, Karur,<br>Tamil Nadu 639003</p>
+                    </address>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="fw-bold mb-3">About Us</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="{{ url_for('programs') }}" class="text-light text-decoration-none">Programs we offer</a></li>
+                        <li class="mb-2"><a href="#colleges" class="text-light text-decoration-none">For Colleges</a></li>
+                        <li class="mb-2"><a href="#companies" class="text-light text-decoration-none">For companies</a></li>
+                        <li class="mb-2"><a href="#partnership" class="text-light text-decoration-none">Why partner with us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="fw-bold mb-3">Programs</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Tech Trio</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">UI/UX Design</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Full Stack</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Data Analysis</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">MetaZen</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="fw-bold mb-3">Products</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Resume Crafts</a></li>
+                    </ul>
+                    <h6 class="fw-bold mb-3 mt-4">Events</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Workshops</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Webinars</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Bootcamps</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Contests</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Competitions</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h6 class="fw-bold mb-3">Policies</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Refund Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">Terms & Conditions</a></li>
+                    </ul>
+                    <h6 class="fw-bold mb-3 mt-4">Contact Us</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="mailto:contact@cybernaut.co.in" class="text-light text-decoration-none">contact@cybernaut.co.in</a></li>
+                        <li class="mb-2"><a href="tel:+916382055035" class="text-light text-decoration-none">+91 63820 55035</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h5 class="mb-3">Have any questions?</h5>
+                    <a href="https://wa.me/916382055035" class="btn btn-success">
+                        <i class="fab fa-whatsapp me-2"></i>Chat with us on WhatsApp
+                    </a>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0 text-light">&copy; 2024 Cybernaut edu tech. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

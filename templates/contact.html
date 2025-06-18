@@ -1,0 +1,417 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - Cybernaut Edu-Tech{% endblock %}
+
+{% block content %}
+<!-- Contact Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h1 class="hero-title">Get in Touch</h1>
+                <p class="hero-subtitle">Ready to start your tech journey? Contact us today and let's build your future together.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Information Section -->
+<section class="contact-info-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4>Our Location</h4>
+                    <p>43/a, Nehru Nagar, Rayanur,<br>Thoronakkalpatti, Karur,<br>Tamil Nadu 639003</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h4>Phone Number</h4>
+                    <p><a href="tel:+916382055035">+91 63820 55035</a></p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h4>Email Address</h4>
+                    <p><a href="mailto:contact@cybernaut.co.in">contact@cybernaut.co.in</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form Section -->
+<section class="contact-form-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="contact-form-container">
+                    <h2 class="section-title text-center">Send us a Message</h2>
+                    <p class="section-subtitle text-center">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                    
+                    <form method="POST" action="{{ url_for('submit_contact') }}" class="contact-form">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name">Full Name *</label>
+                                    <input type="text" id="name" name="name" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" class="form-control" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="subject">Subject *</label>
+                                    <select id="subject" name="subject" class="form-control" required>
+                                        <option value="">Select a subject</option>
+                                        <option value="general">General Inquiry</option>
+                                        <option value="programs">Programs Information</option>
+                                        <option value="enrollment">Enrollment</option>
+                                        <option value="partnership">Partnership</option>
+                                        <option value="support">Technical Support</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" class="form-control" placeholder="Tell us more about your inquiry..." required></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WhatsApp CTA Section -->
+<section class="whatsapp-cta-section">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2>Have any questions?</h2>
+                <p>Chat with us on WhatsApp for instant support</p>
+                <a href="https://wa.me/916382055035" class="btn btn-success btn-lg">
+                    <i class="fab fa-whatsapp me-2"></i>Chat with us on WhatsApp
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="map-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="section-title text-center">Find Us</h2>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.1234567890123!2d78.12345678901234!3d10.12345678901234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDA3JzM0LjQiTiA3OMKwMDcnMzQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123"
+                        width="100%" 
+                        height="450" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.contact-info-section {
+    padding: 80px 0;
+    background: var(--background-alt);
+}
+
+.contact-card {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.contact-card h4 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.contact-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+}
+
+.contact-card a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-card a:hover {
+    color: var(--secondary-color);
+}
+
+.contact-form-section {
+    padding: 80px 0;
+    background: white;
+}
+
+.contact-form-container {
+    background: var(--background-alt);
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form-container .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.contact-form-container .section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.whatsapp-cta-section {
+    padding: 80px 0;
+    background: var(--primary-color);
+    color: white;
+}
+
+.whatsapp-cta-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.whatsapp-cta-section p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 2rem;
+}
+
+.btn-success {
+    background: #25d366;
+    border: none;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.btn-success:hover {
+    background: #128c7e;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+}
+
+.map-section {
+    padding: 80px 0;
+    background: var(--background-alt);
+}
+
+.map-section .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+}
+
+.map-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .contact-card {
+        margin-bottom: 2rem;
+    }
+    
+    .contact-form-container {
+        padding: 2rem;
+    }
+    
+    .whatsapp-cta-section h2 {
+        font-size: 2rem;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Handle course enrollment parameters from URL
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const course = urlParams.get('course');
+    const price = urlParams.get('price');
+    const message = urlParams.get('message');
+    
+    if (course && price && message) {
+        // Pre-fill the form with course information
+        const subjectSelect = document.getElementById('subject');
+        const messageTextarea = document.getElementById('message');
+        
+        if (subjectSelect) {
+            subjectSelect.value = 'enrollment';
+        }
+        
+        if (messageTextarea) {
+            messageTextarea.value = decodeURIComponent(message);
+        }
+        
+        // Add a visual indicator that this is a course enrollment
+        const formContainer = document.querySelector('.contact-form-container');
+        if (formContainer) {
+            const enrollmentNotice = document.createElement('div');
+            enrollmentNotice.className = 'alert alert-info';
+            enrollmentNotice.innerHTML = `
+                <strong>Course Enrollment Request:</strong> ${course} (₹${price})
+                <br>Please fill out the form below to complete your enrollment.
+            `;
+            formContainer.insertBefore(enrollmentNotice, formContainer.firstChild);
+        }
+    }
+});
+
+// Form validation and submission
+document.querySelector('.contact-form').addEventListener('submit', function(e) {
+    const requiredFields = this.querySelectorAll('[required]');
+    let isValid = true;
+    
+    requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+            field.classList.add('is-invalid');
+            isValid = false;
+        } else {
+            field.classList.remove('is-invalid');
+        }
+    });
+    
+    if (!isValid) {
+        e.preventDefault();
+        alert('Please fill in all required fields.');
+    }
+});
+
+// Real-time validation
+document.querySelectorAll('.contact-form input, .contact-form textarea, .contact-form select').forEach(field => {
+    field.addEventListener('blur', function() {
+        if (this.hasAttribute('required') && !this.value.trim()) {
+            this.classList.add('is-invalid');
+        } else {
+            this.classList.remove('is-invalid');
+        }
+    });
+    
+    field.addEventListener('input', function() {
+        if (this.classList.contains('is-invalid') && this.value.trim()) {
+            this.classList.remove('is-invalid');
+        }
+    });
+});
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offsetTop = target.offsetTop - 80;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+</script>
+{% endblock %} 
