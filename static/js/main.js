@@ -447,4 +447,34 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+});
+
+// --- HERO BALLS PARALLAX EFFECT ---
+document.addEventListener('DOMContentLoaded', function() {
+  const balls = [
+    document.querySelector('.hero-ball.ball1'),
+    document.querySelector('.hero-ball.ball2'),
+    document.querySelector('.hero-ball.ball3'),
+    document.querySelector('.hero-ball.ball4'),
+    document.querySelector('.hero-ball.ball5')
+  ];
+  const hero = document.querySelector('.hero-section');
+  if (!balls[0] || !hero) return;
+  hero.addEventListener('mousemove', function(e) {
+    const rect = hero.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const w = rect.width, h = rect.height;
+    // Parallax factors for each ball
+    const factors = [0.08, 0.12, 0.18, 0.15, 0.22];
+    balls.forEach((ball, i) => {
+      if (!ball) return;
+      const dx = (x - w/2) * factors[i];
+      const dy = (y - h/2) * factors[i];
+      ball.style.transform = `translate(${dx}px, ${dy}px)`;
+    });
+  });
+  hero.addEventListener('mouseleave', function() {
+    balls.forEach(ball => { if (ball) ball.style.transform = 'translate(0,0)'; });
+  });
 }); 

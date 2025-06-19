@@ -3,16 +3,19 @@
 {% block title %}About Us - One Percentage{% endblock %}
 
 {% block content %}
-<!-- About Hero Section -->
-<section class="hero-section">
-    <div class="container">
-        <div class="row justify-content-center text-center">
-            <div class="col-lg-8">
-                <h1 class="hero-title">About One Percentage</h1>
-                <p class="hero-subtitle">Empowering learners with hands-on training, future-ready tools, and expert guidance to excel in top tech companies like MAANG.</p>
-            </div>
-        </div>
-    </div>
+<!-- About Hero Section with Spline 3D Robot (with overlay text and button) -->
+<section class="hero-section" style="position:relative;width:100vw;min-height:100vh;height:100vh;overflow:hidden;background:#0f0f0f;">
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.12/build/spline-viewer.js"></script>
+  <spline-viewer
+    url="https://prod.spline.design/aMHktDARg6p50mi9/scene.splinecode"
+    background="transparent"
+    style="position:absolute;top:0;left:0;width:100vw;height:100vh;z-index:1;pointer-events:none;">
+  </spline-viewer>
+  <div class="hero-text" style="position:relative;z-index:2;text-align:center;top:30%;padding:1rem;">
+    <h1 class="hero-title">About One Percentage</h1>
+    <p class="hero-subtitle">Empowering learners with hands-on training, future-ready tools, and expert guidance to excel in top tech companies like MAANG.</p>
+    <a href="{{ url_for('contact') }}" class="btn btn-primary btn-lg mt-4">Get in Touch</a>
+  </div>
 </section>
 
 <!-- About Content Section -->
@@ -455,6 +458,9 @@
 {% endblock %}
 
 {% block extra_js %}
+<script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+{% endblock %}
+
 <script>
 // Counter Animation
 function animateCounters() {
@@ -495,5 +501,4 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.statistics-section, .team-card, .vision-card, .mission-card').forEach(el => {
     observer.observe(el);
 });
-</script>
-{% endblock %} 
+</script> 
