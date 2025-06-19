@@ -199,6 +199,10 @@ def about():
                          team_members=team_members,
                          statistics=statistics)
 
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html')

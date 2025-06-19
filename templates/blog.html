@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - One Percentage{% endblock %}
+
+{% block content %}
+<!-- Blog Hero Section -->
+<section class="blog-hero-section py-5 text-center" style="background: linear-gradient(135deg, #23263a 0%, #181824 100%); color: #fff;">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Our Blog</h1>
+        <p class="lead mb-0">Insights, stories, and resources to help you grow your tech career.</p>
+    </div>
+</section>
+
+<!-- Blog Main Content -->
+<section class="blog-main-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Blog Posts -->
+            <div class="col-lg-8 mb-4 mb-lg-0">
+                <div class="row g-4">
+                    <!-- Blog Post 1 -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Blog Post 1">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">5 Habits of Highly Effective Tech Learners</h5>
+                                <p class="card-text">Discover the daily routines and mindsets that set top tech students apart from the rest.</p>
+                                <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Blog Post 2 -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Blog Post 2">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">How to Build a Standout Portfolio</h5>
+                                <p class="card-text">Tips and tricks for creating a portfolio that gets you noticed by recruiters and employers.</p>
+                                <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Blog Post 3 -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Blog Post 3">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">The Future of AI in Education</h5>
+                                <p class="card-text">Explore how artificial intelligence is transforming the way we learn and teach in the digital age.</p>
+                                <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Blog Post 4 -->
+                    <div class="col-md-6">
+                        <div class="card h-100 shadow-sm border-0">
+                            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80" class="card-img-top" alt="Blog Post 4">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Why Soft Skills Matter in Tech</h5>
+                                <p class="card-text">Learn why communication, teamwork, and adaptability are just as important as coding skills.</p>
+                                <a href="#" class="btn btn-primary mt-auto">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="card shadow-sm border-0 mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Categories</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li><a href="#" class="text-decoration-none">Career Advice</a></li>
+                            <li><a href="#" class="text-decoration-none">Tech Skills</a></li>
+                            <li><a href="#" class="text-decoration-none">AI & Data</a></li>
+                            <li><a href="#" class="text-decoration-none">Student Stories</a></li>
+                            <li><a href="#" class="text-decoration-none">Events</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Recent Posts</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li><a href="#" class="text-decoration-none">How to Build a Standout Portfolio</a></li>
+                            <li><a href="#" class="text-decoration-none">The Future of AI in Education</a></li>
+                            <li><a href="#" class="text-decoration-none">Why Soft Skills Matter in Tech</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

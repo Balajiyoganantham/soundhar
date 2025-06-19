@@ -431,19 +431,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth scroll for hero buttons
-    document.querySelectorAll('.hero-scroll').forEach(function(btn) {
+    // Enhanced smooth scroll for hero-scroll buttons
+    document.querySelectorAll('.hero-scroll').forEach(btn => {
         btn.addEventListener('click', function(e) {
-            const href = btn.getAttribute('href');
+            const href = this.getAttribute('href');
             if (href && href.startsWith('#')) {
+                // On-page anchor
                 const target = document.querySelector(href);
                 if (target) {
                     e.preventDefault();
-                    window.scrollTo({
-                        top: target.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({ top: offsetTop, behavior: 'smooth' });
                 }
+            } else if (href) {
+                // If it's a route, go to the page
+                window.location.href = href;
             }
         });
     });

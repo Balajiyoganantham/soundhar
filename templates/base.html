@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#181824">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>{% block title %}Cybernaut Edu-Tech - Boost Your Tech Career{% endblock %}</title>
     <meta name="description" content="Learn to code with hands-on training, AI-driven tools, and expert guidance to excel in top tech companies like MAANG.">
     <meta name="keywords" content="coding bootcamp, tech training, MAANG preparation, programming courses">
@@ -15,6 +19,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="manifest" href="/static/manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/images/logo.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/static/images/logo.png">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -42,9 +49,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('programs') }}">Programs</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#blog">Blogs</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
                     </li>
