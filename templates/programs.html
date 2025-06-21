@@ -5,8 +5,60 @@
 {% block content %}
 <!-- Programs Hero Section with Spline 3D Robot -->
 <section class="programs-hero" style="position:relative;width:100vw;min-height:100vh;height:100vh;overflow:hidden;background:#0f0f0f;">
-  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.12/build/spline-viewer.js"></script>
-  <spline-viewer url="https://prod.spline.design/O4ndaMwHe5pd5xed/scene.splinecode"></spline-viewer>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.13/build/spline-viewer.js"></script>
+  <spline-viewer url="https://prod.spline.design/V5dNSvzu7Mti2Xui/scene.splinecode"></spline-viewer>
+  <style>
+    spline-viewer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      pointer-events: auto;
+      /* Slow down animation */
+      animation-duration: 3s !important;
+      animation-timing-function: ease-in-out !important;
+    }
+    
+    /* Slow down all animations within spline-viewer */
+    spline-viewer * {
+      animation-duration: 3s !important;
+      animation-timing-function: ease-in-out !important;
+      transition-duration: 2s !important;
+    }
+    
+    /* Reduce frame rate for smoother, slower animation */
+    spline-viewer {
+      will-change: auto;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+    }
+    
+    /* Watermark hiding overlay */
+    .spline-watermark-blocker {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 160px; /* Increased height for more coverage */
+      /* More aggressive gradient to ensure watermark is hidden */
+      background: linear-gradient(to top, rgb(15, 15, 15) 50%, rgba(15, 15, 15, 0));
+      z-index: 10;
+      pointer-events: auto;
+    }
+    
+    /* Light mode overlay */
+    [data-theme="light"] .spline-watermark-blocker {
+      background: linear-gradient(to top, rgb(255, 255, 255) 50%, rgba(255, 255, 255, 0));
+    }
+    
+    /* Dark mode overlay */
+    [data-theme="dark"] .spline-watermark-blocker {
+      background: linear-gradient(to top, rgb(15, 15, 15) 50%, rgba(15, 15, 15, 0));
+    }
+  </style>
+  <div class="spline-watermark-blocker"></div>
 </section>
 
 <!-- Event Gallery Section -->
@@ -43,19 +95,138 @@
     <div class="container">
         <div class="filter-tabs">
             <button class="filter-btn active" data-category="all">All Categories</button>
-            <button class="filter-btn" data-category="online">Online</button>
-            <button class="filter-btn" data-category="offline">Offline</button>
-            <button class="filter-btn" data-category="vac">VAC</button>
+            <button class="filter-btn" data-category="online">Student</button>
+            <button class="filter-btn" data-category="offline">College</button>
             <button class="filter-btn" data-category="placement">Placement Support</button>
         </div>
     </div>
 </section>
 
-<!-- Online Courses Section -->
+<!-- Student Courses Section -->
 <section class="courses-section" id="online-courses">
     <div class="container">
-        <h2 class="section-title">Online Courses</h2>
+        <h2 class="section-title">Student Courses</h2>
         <div class="courses-grid">
+            <!-- Python -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/python.png') }}" alt="Python Programming Masterclass" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Python';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Python Programming Masterclass</h3>
+                    <div class="course-details">
+                        <span class="duration">40+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">12k Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹2000/-</span>
+                        <span class="original-price">₹4000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=8) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Java -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/java.png') }}" alt="Java Programming Complete Course" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Java';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Java Programming Complete Course</h3>
+                    <div class="course-details">
+                        <span class="duration">45+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">10k Enrolled</span>
+                        <span class="rating">4.7/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹2200/-</span>
+                        <span class="original-price">₹4500/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=9) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- C++ -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/cpp.png') }}" alt="C++ Programming Comprehensive Course" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=C%2B%2B';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">C++ Programming Comprehensive Course</h3>
+                    <div class="course-details">
+                        <span class="duration">35+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">8k Enrolled</span>
+                        <span class="rating">4.6/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹1800/-</span>
+                        <span class="original-price">₹3500/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=10) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/javascript.png') }}" alt="JavaScript Programming Complete Course" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=JavaScript';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">JavaScript Programming Complete Course</h3>
+                    <div class="course-details">
+                        <span class="duration">30+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">11k Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹1900/-</span>
+                        <span class="original-price">₹3800/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=11) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- HTML & CSS -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/html-css.png') }}" alt="HTML & CSS Complete Web Development Course" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=HTML+%26+CSS';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">HTML & CSS Complete Web Development Course</h3>
+                    <div class="course-details">
+                        <span class="duration">25+ Hours</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">14k Enrolled</span>
+                        <span class="rating">4.9/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹1500/-</span>
+                        <span class="original-price">₹3000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=12) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
             <!-- Tech Trio -->
             <div class="course-card" data-category="online">
                 <div class="course-image">
@@ -76,7 +247,7 @@
                         <span class="current-price">₹2500/-</span>
                         <span class="original-price">₹5000/-</span>
                     </div>
-                    <button class="enroll-btn" onclick="enrollCourse('TechTrio', 2500)">Enroll Now</button>
+                    <a href="{{ url_for('course_detail', course_id=1) }}" class="enroll-btn">Enroll Now</a>
                 </div>
             </div>
 
@@ -100,7 +271,7 @@
                         <span class="current-price">₹3000/-</span>
                         <span class="original-price">₹5000/-</span>
                     </div>
-                    <button class="enroll-btn" onclick="enrollCourse('UIUXDesign', 3000)">Enroll Now</button>
+                    <a href="{{ url_for('course_detail', course_id=2) }}" class="enroll-btn">Enroll Now</a>
                 </div>
             </div>
 
@@ -124,44 +295,236 @@
                         <span class="current-price">₹3500/-</span>
                         <span class="original-price">₹5000/-</span>
                     </div>
-                    <button class="enroll-btn" onclick="enrollCourse('FullStackDevelopment', 3500)">Enroll Now</button>
+                    <a href="{{ url_for('course_detail', course_id=3) }}" class="enroll-btn">Enroll Now</a>
                 </div>
             </div>
 
-            <!-- Data Analytics -->
+            <!-- Data Analyst – PRO Combo Pack -->
             <div class="course-card" data-category="online">
                 <div class="course-image">
-                    <img src="{{ url_for('static', filename='images/courses/data-analytics.jpg') }}" alt="Data Analytics">
+                    <img src="{{ url_for('static', filename='images/courses/data-analytics.jpg') }}" alt="Data Analyst – PRO Combo Pack">
                 </div>
                 <div class="course-content">
-                    <h3 class="course-title">DataAnalytics</h3>
+                    <h3 class="course-title">Data Analyst – PRO Combo Pack</h3>
                     <div class="course-details">
-                        <span class="duration">60+ Hours</span>
+                        <span class="duration">8 Weeks</span>
                         <span class="language">Tamil</span>
-                        <span class="internship">Internship</span>
+                        <span class="internship">Ready for Analyst Internships / Entry Jobs</span>
                     </div>
                     <div class="course-stats">
-                        <span class="enrolled">10K Enrolled</span>
+                        <span class="enrolled">15k Enrolled</span>
                         <span class="rating">4.8/5.0</span>
                     </div>
                     <div class="course-pricing">
-                        <span class="current-price">₹3500/-</span>
+                        <span class="current-price">₹999–₹1499</span>
                         <span class="original-price">₹5000/-</span>
                     </div>
-                    <button class="enroll-btn" onclick="enrollCourse('DataAnalytics', 3500)">Enroll Now</button>
+                    <a href="{{ url_for('course_detail', course_id=4) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Data Science – PRO Combo Pack -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/data-science.png') }}" alt="Data Science – PRO Combo Pack" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Data+Science';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Data Science – PRO Combo Pack</h3>
+                    <div class="course-details">
+                        <span class="duration">10–12 Weeks</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">Portfolio-ready + Interview Prep</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">15k Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹1499–₹1999</span>
+                        <span class="original-price">₹5000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=5) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Cyber Security – PRO Combo Pack -->
+            <div class="course-card" data-category="online">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/cyber-security.png') }}" alt="Cyber Security – PRO Combo Pack" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Cyber+Security';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Cyber Security – PRO Combo Pack</h3>
+                    <div class="course-details">
+                        <span class="duration">8–10 Weeks</span>
+                        <span class="language">Tamil</span>
+                        <span class="internship">CEH-Ready Beginner + Internship Opportunity</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">15k Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹1499</span>
+                        <span class="original-price">₹5000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=6) }}" class="enroll-btn">Enroll Now</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Offline Courses Section -->
-<section class="courses-section" id="offline-courses">
+<!-- College Courses Section -->
+<section class="courses-section" id="college-courses">
     <div class="container">
-        <h2 class="section-title">Offline Courses</h2>
+        <h2 class="section-title">College Courses</h2>
         <div class="courses-grid">
-            <!-- MetaZen -->
+            <!-- UI/UX Design -->
             <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/ui-ux-college.png') }}" alt="UI/UX Design" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=UI%2FUX+Design';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">UI/UX Design</h3>
+                    <div class="course-details">
+                        <span class="duration">80+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Advanced Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">500 Enrolled</span>
+                        <span class="rating">4.9/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹25000/-</span>
+                        <span class="original-price">₹50000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=13) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- AI/ML -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/ai-ml.png') }}" alt="Advanced AI & Machine Learning Course" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Advanced+AI+%26+ML';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Advanced AI & Machine Learning Course</h3>
+                    <div class="course-details">
+                        <span class="duration">100+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Research Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">300 Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹35000/-</span>
+                        <span class="original-price">₹70000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=14) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Cybersecurity -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/cybersecurity-college.png') }}" alt="Cybersecurity" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Cybersecurity';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Cybersecurity</h3>
+                    <div class="course-details">
+                        <span class="duration">90+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Security Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">400 Enrolled</span>
+                        <span class="rating">4.9/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹30000/-</span>
+                        <span class="original-price">₹60000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=15) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Data Analyst -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/data-analyst-college.png') }}" alt="Data Analyst" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Data+Analyst';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Data Analyst</h3>
+                    <div class="course-details">
+                        <span class="duration">70+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Analytics Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">600 Enrolled</span>
+                        <span class="rating">4.7/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹20000/-</span>
+                        <span class="original-price">₹40000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=16) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Data Scientist -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/data-scientist.png') }}" alt="Data Scientist" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Data+Scientist';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Advanced Data Science Course</h3>
+                    <div class="course-details">
+                        <span class="duration">120+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Research Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">250 Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹45000/-</span>
+                        <span class="original-price">₹90000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=18) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Web Development -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/web-development.png') }}" alt="Web Development" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Web+Development';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">Web Development</h3>
+                    <div class="course-details">
+                        <span class="duration">85+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Full-Stack Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">700 Enrolled</span>
+                        <span class="rating">4.9/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹28000/-</span>
+                        <span class="original-price">₹55000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=17) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- MetaZen -->
+            <!-- <div class="course-card" data-category="offline">
                 <div class="course-image">
                     <img src="{{ url_for('static', filename='images/courses/meta-zen.jpg') }}" alt="MetaZen">
                 </div>
@@ -180,7 +543,103 @@
                         <span class="current-price">₹40000/-</span>
                         <span class="original-price">₹90000/-</span>
                     </div>
-                    <button class="enroll-btn" onclick="enrollCourse('Metazen', 40000)">Enroll Now</button>
+                    <a href="{{ url_for('course_detail', course_id=6) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div> -->
+
+            <!-- Full Stack Development -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/fullstack-college.png') }}" alt="Full Stack Development" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Full+Stack+Development';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">FULL STACK DEVELOPMENT COURSE</h3>
+                    <div class="course-details">
+                        <span class="duration">100+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Full-Stack Projects</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">300 Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹35000/-</span>
+                        <span class="original-price">₹70000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=20) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Trading Course -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/trading-course.png') }}" alt="Trading Course" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Trading+Course';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">TRADING COURSE</h3>
+                    <div class="course-details">
+                        <span class="duration">80+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Live Market Practice</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">200 Enrolled</span>
+                        <span class="rating">4.7/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹25000/-</span>
+                        <span class="original-price">₹50000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=21) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- E-Commerce Course -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/ecommerce-course.png') }}" alt="E-Commerce Course" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=E-Commerce+Course';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">E‑COMMERCE COURSE</h3>
+                    <div class="course-details">
+                        <span class="duration">60+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Online Store Project</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">180 Enrolled</span>
+                        <span class="rating">4.8/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹20000/-</span>
+                        <span class="original-price">₹40000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=22) }}" class="enroll-btn">Enroll Now</a>
+                </div>
+            </div>
+
+            <!-- Drop-shipping Course -->
+            <div class="course-card" data-category="offline">
+                <div class="course-image">
+                    <img src="{{ url_for('static', filename='images/courses/dropshipping-course.png') }}" alt="Drop-shipping Course" onerror="this.onerror=null;this.src='https://placehold.co/400x200?text=Drop-shipping+Course';">
+                </div>
+                <div class="course-content">
+                    <h3 class="course-title">DROP‑SHIPPING COURSE</h3>
+                    <div class="course-details">
+                        <span class="duration">50+ Hours</span>
+                        <span class="language">Tamil/English</span>
+                        <span class="internship">Business Launch Project</span>
+                    </div>
+                    <div class="course-stats">
+                        <span class="enrolled">150 Enrolled</span>
+                        <span class="rating">4.6/5.0</span>
+                    </div>
+                    <div class="course-pricing">
+                        <span class="current-price">₹18000/-</span>
+                        <span class="original-price">₹36000/-</span>
+                    </div>
+                    <a href="{{ url_for('course_detail', course_id=23) }}" class="enroll-btn">Enroll Now</a>
                 </div>
             </div>
         </div>
@@ -214,10 +673,10 @@
             <div class="col-lg-6">
                 <h2 class="section-title">Get your quality<br>Skills Certificate<br>from One Percentage</h2>
                 <p>Join 5000+ certified professionals</p>
-                <button class="enroll-btn btn-lg" onclick="enrollCourse('Certificate', 0)">Get Started Now</button>
+                <a href="{{ url_for('course_detail', course_id=7) }}" class="enroll-btn btn-lg">Get Started Now</a>
             </div>
             <div class="col-lg-6">
-                <img src="{{ url_for('static', filename='images/certificate.png') }}" alt="One Percentage Certificate" class="certificate-image">
+                <img src="{{ url_for('static', filename='images/certificate/onepercntge certificate.jpg') }}" alt="One Percentage Certificate" class="certificate-image">
             </div>
         </div>
     </div>
@@ -603,10 +1062,25 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show/hide sections based on category
             courseSections.forEach(section => {
                 if (category === 'all') {
+                    // Show all sections when "All Categories" is selected
                     section.style.display = 'block';
-                } else {
-                    const sectionId = section.id;
-                    if (sectionId.includes(category)) {
+                } else if (category === 'online') {
+                    // Show only student courses section
+                    if (section.id === 'online-courses') {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                } else if (category === 'offline') {
+                    // Show only college courses section
+                    if (section.id === 'college-courses') {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                } else if (category === 'placement') {
+                    // Show only placement support section
+                    if (section.id === 'placement-courses') {
                         section.style.display = 'block';
                     } else {
                         section.style.display = 'none';
@@ -614,13 +1088,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
-            // Filter course cards
+            // Filter course cards within visible sections
             courseCards.forEach(card => {
                 const cardCategory = card.getAttribute('data-category');
-                if (category === 'all' || cardCategory === category) {
+                const parentSection = card.closest('.courses-section');
+                
+                if (category === 'all') {
+                    // Show all cards when "All Categories" is selected
                     card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
+                } else if (category === 'online') {
+                    // Show only online (student) courses
+                    if (cardCategory === 'online') {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                } else if (category === 'offline') {
+                    // Show only offline (college) courses
+                    if (cardCategory === 'offline') {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                } else if (category === 'placement') {
+                    // Show only placement courses
+                    if (cardCategory === 'placement') {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
                 }
             });
         });

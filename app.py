@@ -160,6 +160,16 @@ def course_detail(course_id):
         course = Course.query.get_or_404(course_id)
         faqs = FAQ.query.filter_by(course_id=course_id).all()
         articles = Article.query.filter_by(course_id=course_id).all()
+        
+        # Parse curriculum JSON for course ID 8-12 (Programming courses), 13 (UI/UX College), 14 (AI/ML), 15 (Cybersecurity), 16 (Data Analyst), 17 (Advanced Web Development), 18 (Data Science), 19 (Advanced UI/UX), 20 (Full Stack Development), 21 (Trading), 22 (E-Commerce), and 23 (Drop-shipping)
+        curriculum_modules = None
+        if course_id in [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] and course.course_content:
+            try:
+                import json
+                curriculum_modules = json.loads(course.course_content)
+            except (json.JSONDecodeError, TypeError):
+                curriculum_modules = None
+                
     except Exception as e:
         flash('Course not found or database error', 'error')
         return redirect(url_for('home'))
@@ -167,15 +177,49 @@ def course_detail(course_id):
     return render_template('course_detail.html', 
                          course=course,
                          faqs=faqs,
-                         articles=articles)
+                         articles=articles,
+                         curriculum_modules=curriculum_modules)
 
-@app.route('/enroll/<int:course_id>')
+@app.route('/enroll/<int:course_id>', methods=['GET', 'POST'])
 def enroll(course_id):
     try:
         course = Course.query.get_or_404(course_id)
-        # Redirect to Google Form for enrollment
-        google_form_url = "https://forms.gle/YOUR_GOOGLE_FORM_ID_HERE"  # Replace with your actual Google Form URL
-        return redirect(google_form_url)
+        if request.method == 'POST':
+            name = request.form.get('name')
+            email = request.form.get('email')
+            phone = request.form.get('phone')
+            education = request.form.get('education')
+            profile = request.form.get('profile')
+            
+            # Validate required fields
+            if not all([name, email, phone, education, profile]):
+                flash('Please fill in all required fields', 'error')
+                return redirect(url_for('course_detail', course_id=course_id))
+            
+            # Send confirmation email to admin and user
+            try:
+                msg = Message(
+                    subject=f"New Enrollment: {course.title}",
+                    recipients=[app.config['MAIL_USERNAME']],
+                    body=f"Name: {name}\nEmail: {email}\nPhone: {phone}\nEducation: {education}\nProfile: {profile}\nCourse: {course.title}"
+                )
+                mail.send(msg)
+                # Confirmation to user
+                user_msg = Message(
+                    subject=f"Enrollment Confirmation: {course.title}",
+                    recipients=[email],
+                    body=f"Thank you for enrolling in {course.title}! We have received your details and will contact you soon."
+                )
+                mail.send(user_msg)
+            except Exception as e:
+                print(f"Mail error: {e}")
+            
+            flash('Thank you for enrolling! We have received your details and will contact you soon.', 'success')
+            return redirect(url_for('course_detail', course_id=course_id))
+        
+        # GET request: redirect to course detail page
+        return redirect(url_for('course_detail', course_id=course_id))
+        
     except Exception as e:
         flash('Course not found', 'error')
         return redirect(url_for('home'))

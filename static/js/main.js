@@ -40,8 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Smooth scrolling for navigation links (excluding hero buttons)
+document.querySelectorAll('a[href^="#"]:not(.hero-actions a)').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
@@ -52,6 +52,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth'
             });
         }
+    });
+});
+
+// Debug navigation links
+document.addEventListener('DOMContentLoaded', function() {
+    const navLinks = document.querySelectorAll('#mainNav .nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            console.log('Navigation link clicked:', this.getAttribute('href'));
+            // Don't prevent default - let the link work normally
+        });
     });
 });
 
@@ -479,4 +490,328 @@ document.addEventListener('DOMContentLoaded', function() {
   hero.addEventListener('mouseleave', function() {
     balls.forEach(ball => { if (ball) ball.style.transform = 'translate(0,0)'; });
   });
-}); 
+});
+
+// Theme Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const body = document.body;
+    
+    // Check for saved theme preference or default to light mode
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    setTheme(currentTheme);
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = body.getAttribute('data-theme') || 'light';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
+    });
+    
+    function setTheme(theme) {
+        body.setAttribute('data-theme', theme);
+        
+        if (theme === 'dark') {
+            themeIcon.className = 'fa-solid fa-moon';
+            body.classList.add('dark-theme');
+            body.classList.remove('light-theme');
+        } else {
+            themeIcon.className = 'fa-solid fa-sun';
+            body.classList.add('light-theme');
+            body.classList.remove('dark-theme');
+        }
+    }
+});
+
+// Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = mobileMenuButton.querySelector('i');
+    
+    mobileMenuButton.addEventListener('click', function() {
+        const isOpen = mobileMenu.classList.toggle('hidden');
+        
+        if (isOpen) {
+            menuIcon.className = 'fa-solid fa-bars text-xl';
+        } else {
+            menuIcon.className = 'fa-solid fa-times text-xl';
+        }
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.add('hidden');
+            menuIcon.className = 'fa-solid fa-bars text-xl';
+        }
+    });
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', function() {
+    const navbar = document.getElementById('mainNav');
+    if (window.scrollY > 50) {
+        navbar.classList.add('shadow-lg', 'bg-white/98', 'dark:bg-gray-900/98');
+    } else {
+        navbar.classList.remove('shadow-lg', 'bg-white/98', 'dark:bg-gray-900/98');
+    }
+});
+
+// Smooth scrolling for anchor links
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const offsetTop = target.offsetTop - 80;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+
+// Intersection Observer for animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-up');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animation
+document.addEventListener('DOMContentLoaded', function() {
+    const animatedElements = document.querySelectorAll('.course-card, .testimonial-card, .blog-item, .partner-item, .milestone-item, .feature-item');
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+});
+
+// Counter Animation
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-counter, .milestone-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target') || counter.getAttribute('data-count'));
+        const suffix = counter.getAttribute('data-suffix') || '';
+        const increment = target / 200;
+        let current = 0;
+        
+        const updateCounter = () => {
+            if (current < target) {
+                current += increment;
+                counter.textContent = Math.ceil(current) + suffix;
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target + suffix;
+            }
+        };
+        
+        updateCounter();
+    });
+}
+
+// Trigger counter animation when milestones section is visible
+const milestonesObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            milestonesObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const milestonesSection = document.querySelector('.milestones');
+    if (milestonesSection) {
+        milestonesObserver.observe(milestonesSection);
+    }
+});
+
+// Event Gallery Slider
+function initEventSlider() {
+    const eventSlider = document.querySelector('.event-slider');
+    if (eventSlider) {
+        let scrollPosition = 0;
+        
+        setInterval(() => {
+            scrollPosition += 1;
+            if (scrollPosition >= eventSlider.scrollWidth - eventSlider.clientWidth) {
+                scrollPosition = 0;
+            }
+            eventSlider.scrollLeft = scrollPosition;
+        }, 50);
+    }
+}
+
+// Category filtering functionality
+function initCategoryFilters() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const courseCards = document.querySelectorAll('.course-card');
+    const courseSections = document.querySelectorAll('.courses-section');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // Update active button
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-primary-600', 'text-white');
+                b.classList.add('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+            });
+            this.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+            this.classList.add('bg-primary-600', 'text-white');
+            
+            // Show/hide sections based on category
+            courseSections.forEach(section => {
+                if (category === 'all') {
+                    section.classList.remove('hidden');
+                } else {
+                    const sectionId = section.id;
+                    if (sectionId.includes(category)) {
+                        section.classList.remove('hidden');
+                    } else {
+                        section.classList.add('hidden');
+                    }
+                }
+            });
+            
+            // Filter course cards
+            courseCards.forEach(card => {
+                const cardCategory = card.getAttribute('data-category');
+                if (category === 'all' || cardCategory === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+}
+
+// Form validation and submission
+function initFormValidation() {
+    const forms = document.querySelectorAll('form');
+    
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('border-red-500', 'focus:border-red-500');
+                    isValid = false;
+                } else {
+                    field.classList.remove('border-red-500', 'focus:border-red-500');
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                showNotification('Please fill in all required fields.', 'error');
+            }
+        });
+        
+        // Real-time validation
+        const inputs = form.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.classList.add('border-red-500', 'focus:border-red-500');
+                } else {
+                    this.classList.remove('border-red-500', 'focus:border-red-500');
+                }
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.classList.contains('border-red-500') && this.value.trim()) {
+                    this.classList.remove('border-red-500', 'focus:border-red-500');
+                }
+            });
+        });
+    });
+}
+
+// Notification system
+function showNotification(message, type = 'info') {
+    const notification = document.createElement('div');
+    const colors = {
+        success: 'bg-green-100 border-green-400 text-green-700',
+        error: 'bg-red-100 border-red-400 text-red-700',
+        warning: 'bg-yellow-100 border-yellow-400 text-yellow-700',
+        info: 'bg-blue-100 border-blue-400 text-blue-700'
+    };
+    
+    notification.className = `fixed top-20 left-1/2 transform -translate-x-1/2 z-50 border px-4 py-3 rounded-lg shadow-lg max-w-md animate-fade-in ${colors[type]}`;
+    notification.innerHTML = `
+        <div class="flex items-center justify-between">
+            <span>${message}</span>
+            <button class="ml-4" onclick="this.parentElement.parentElement.remove()">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        if (notification.parentElement) {
+            notification.remove();
+        }
+    }, 5000);
+}
+
+// Initialize all functionality
+document.addEventListener('DOMContentLoaded', function() {
+    initEventSlider();
+    initCategoryFilters();
+    initFormValidation();
+    
+    // Add loading states to buttons
+    const buttons = document.querySelectorAll('button[type="submit"], .btn-primary');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            if (this.type === 'submit') {
+                this.disabled = true;
+                this.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Loading...';
+            }
+        });
+    });
+});
+
+// Lazy loading for images
+function initLazyLoading() {
+    const images = document.querySelectorAll('img[data-src]');
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('opacity-0');
+                img.classList.add('opacity-100');
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    images.forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Initialize lazy loading
+document.addEventListener('DOMContentLoaded', initLazyLoading); 
