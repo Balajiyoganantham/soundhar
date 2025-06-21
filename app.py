@@ -20,18 +20,18 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME', 'onepercentage51@
 
 mail = Mail(app)
 
-# Database configuration for both development and production
-database_url = os.getenv('DATABASE_URL')
-if database_url:
-    # Production (Render) - PostgreSQL
-    app.config['SQLALCHEMY_DATABASE_URI'] = database_url
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-elif os.path.exists(r'C:/Users/balaj/db/mydb.db'):
-    # Development (local) - SQLite file
-    app.config['SQLALCHEMY_DATABASE_URI'] = r'sqlite:///C:/Users/balaj/db/mydb.db'
-else:
-    # Fallback - In-memory SQLite for testing
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+# Database Configuration
+db_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'instance', 'courses.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+# For Render deployment with persistent disk
+if 'RENDER' in os.environ:
+    # The disk is mounted at '/var/data'
+    data_dir = '/var/data'
+    if not os.path.exists(data_dir):
+        os.makedirs(data_dir)
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{os.path.join(data_dir, 'courses.db')}"
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 

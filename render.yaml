@@ -1,12 +1,16 @@
 services:
   - type: web
-    name: cybernaut-edutech
+    name: soundhar-edutech
     env: python
     buildCommand: "pip install -r requirements.txt && python seed_data.py"
-    startCommand: gunicorn app:app
+    startCommand: "gunicorn app:app"
+    disks:
+      - name: data
+        mountPath: /var/data
+        sizeGB: 1
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.18
+        value: 3.11.8
       - key: SECRET_KEY
         generateValue: true
       - key: FLASK_APP
