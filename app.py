@@ -247,8 +247,38 @@ def about():
 def blog():
     return render_template('blog.html')
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        subject = request.form.get('subject')
+        message = request.form.get('message')
+
+        # Send email
+        msg = Message(f'New Contact Form: {subject}',
+                      sender=app.config['MAIL_USERNAME'],
+                      recipients=[os.environ.get('MAIL_RECIPIENT')])
+        msg.body = f"""
+        You have a new contact form submission from your website.
+
+        Name: {name}
+        Email: {email}
+        Phone: {phone}
+
+        Message:
+        {message}
+        """
+        try:
+            mail.send(msg)
+            flash('Your message has been sent successfully! We will get back to you shortly.', 'success')
+        except Exception as e:
+            current_app.logger.error(f"Failed to send email: {e}")
+            flash('Sorry, there was an error sending your message. Please try again later.', 'danger')
+        
+        return redirect(url_for('contact'))
+
     return render_template('contact.html')
 
 @app.route('/submit-contact', methods=['POST'])
