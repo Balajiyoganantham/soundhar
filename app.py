@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail, Message
+from flask_migrate import Migrate
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+import json
 
 load_dotenv()
 
@@ -34,6 +36,7 @@ if 'RENDER' in os.environ:
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # Models
 class Course(db.Model):
@@ -52,11 +55,11 @@ class Course(db.Model):
     instructor_name = db.Column(db.String(100))
     instructor_title = db.Column(db.String(200))
     instructor_bio = db.Column(db.Text)
-    what_youll_learn = db.Column(db.Text)
-    course_content = db.Column(db.Text)
-    requirements = db.Column(db.Text)
-    image = db.Column(db.String(500))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    what_youll_learn = db.Column(db.Text, nullable=True)
+    course_content = db.Column(db.Text, nullable=True)
+    requirements = db.Column(db.Text, nullable=True)
+    image = db.Column(db.String(100), nullable=True)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
 
 class Mentor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -71,11 +74,12 @@ class Mentor(db.Model):
 class Testimonial(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     student_name = db.Column(db.String(100), nullable=False)
-    rating = db.Column(db.Integer)
-    feedback = db.Column(db.Text)
-    image_url = db.Column(db.String(500))
-    position = db.Column(db.String(200))
-    company = db.Column(db.String(200))
+    rating = db.Column(db.Float, nullable=False)
+    feedback = db.Column(db.Text, nullable=False)
+    image_url = db.Column(db.String(200), nullable=True)
+    position = db.Column(db.String(100))
+    company = db.Column(db.String(100))
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'), nullable=True)
 
 class FAQ(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -135,6 +139,20 @@ def get_data_or_empty(model, **filters):
         print(f"Database error for {model.__name__}: {e}")
         return []
 
+# Custom CLI command to reset and seed database
+@app.cli.command("seed-db")
+def seed_db():
+    """Resets the database and seeds it with initial data."""
+    # Drop all tables and recreate them
+    db.drop_all()
+    db.create_all()
+    
+    # Import and run the seeder function
+    from seed_data import seed_data
+    seed_data()
+    
+    print("Database has been reset and seeded successfully.")
+
 @app.route('/')
 def home():
     courses = get_data_or_empty(Course)
@@ -165,7 +183,6 @@ def course_detail(course_id):
         curriculum_modules = None
         if course_id in [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23] and course.course_content:
             try:
-                import json
                 curriculum_modules = json.loads(course.course_content)
             except (json.JSONDecodeError, TypeError):
                 curriculum_modules = None
